@@ -16,7 +16,7 @@ class PropertyDto:
         'description' : fields.String( description='property description', null_allow=True),
         'property_type' : fields.String( description='Type of property', null_allow=True),
         'city' : fields.String( description='property city'),
-        'rooms_count' : fields.Integer( description='property number of rooms'),
+        'rooms_count' : fields.Integer( description='property number of rooms', min=1),
     })
 
 class UserDto:
@@ -24,14 +24,21 @@ class UserDto:
     user = api.model('user', {
         'email': fields.String(required=True, description='user email address'),
         'username': fields.String(required=True, description='user username'),
-        'password': fields.String(required=True, description='user password'),
+        'name': fields.String(description='user name'),
+        'firstname': fields.String(description='user firstname'),
+        'birthday': fields.DateTime(dt_format='iso8601', description='user birthday'),
         'public_id': fields.String(description='user Identifier'),
         'properties': fields.List(fields.Nested(PropertyDto.property), description='list of created properties', null_allow=True)
     })
     user_update = api.model('user_update', {
-        'email': fields.String(required=True, description='user email address'),
-        'username': fields.String(required=True, description='user username'),
-        'password': fields.String(required=True, description='user password'),
+        'email': fields.String(description='user email address'),
+        'username': fields.String(description='user username'),
+        'password': fields.String(description='user password'),
+    })
+    user_editable = api.model('user_editable', {
+        'name': fields.String(description='user name'),
+        'firstname': fields.String(description='user firstname'),
+        'birthday': fields.DateTime(dt_format='iso', description='user birthday'),
     })
 
 class AuthDto:

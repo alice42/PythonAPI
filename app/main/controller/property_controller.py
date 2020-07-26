@@ -2,7 +2,11 @@ from flask import request
 from flask_restplus import Resource, reqparse
 
 from ..util.dto import PropertyDto
-from ..service.property_service import save_new_property, get_all_properties, get_a_property, save_updated_property
+from ..service.property_service import save_new_property, \
+    get_all_properties, \
+    get_a_property, \
+    save_updated_property, \
+    check_user_permission
 
 from app.main.util.decorator import token_required
 
@@ -54,3 +58,9 @@ class Property(Resource):
         data = request.json
         auth_header = request.headers.get('Authorization')
         return save_updated_property(public_id=public_id, data=data, token=auth_header)
+    # @api.doc('delete a user')
+    # @token_required
+    def delete(self, public_id):
+        """delete a user given its identifier"""
+        auth_header = request.headers.get('Authorization')
+        return check_user_permission(public_id=public_id, token=auth_header)

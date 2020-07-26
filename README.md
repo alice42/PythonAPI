@@ -49,7 +49,8 @@ $ python3 manage.py db migrate --message 'initial database migration'
 $ python3 manage.py db upgrade
 ```
 
-A `flask_main.db` file should be generate in `/app`
+A `migrations` folder should be generate at the root of the project.
+A `flask_main.db` file should be generate in `/app/main/`
 Run the app
 
 ```

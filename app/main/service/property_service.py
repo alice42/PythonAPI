@@ -73,10 +73,73 @@ def save_updated_property(public_id, data, token):
         }
         return response_object, 409
     else:
-        db.session.commit()
-        return property
+        if token:
+            auth_token = token.split(" ")[0]
+        else:
+            response_object = {
+                'status': 'fail',
+                'message': 'You must be logged in to update your property'
+            }
+            return response_object, 401
+        if auth_token:
+            property_to_update = Property.query.filter_by(public_id=public_id).first()
+            resp = User.decode_auth_token(auth_token)
+            to_authentify = User.query.filter_by(id=resp).first()
+            if to_authentify.id == property_to_update.user_id:
+                authentified_user = True
+            else:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'You can only update your properties'
+                }
+                return response_object, 401
+        if authentified_user:
+            db.session.commit()
+            response_object = {
+                'status': 'success',
+                'message': 'Property successfully updated.',
+            }
+            return response_object, 201
 
 
 def save_changes(data):
     db.session.add(data)
     db.session.commit()
+
+def check_user_permission(public_id, token):
+    try:
+        if token:
+            auth_token = token.split(" ")[0]
+        else:
+            response_object = {
+                'status': 'fail',
+                'message': 'You must be logged in to delete your account'
+            }
+            return response_object, 401
+        if auth_token:
+            property_to_update = Property.query.filter_by(public_id=public_id).first()
+            resp = User.decode_auth_token(auth_token)
+            to_authentify = User.query.filter_by(id=resp).first()
+            if to_authentify.id == property_to_update.id:
+                authentified_user = True
+            else:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'You can only delete our own account'
+                }
+                return response_object, 401
+        if authentified_user:
+            Auth.logout_user(data=token)
+            db.session.delete(user)
+            db.session.commit()
+            response_object = {
+                'status': 'success',
+                'message': 'Successfully deleted.'
+            }
+        return response_object, 200
+    except Exception as e:
+        response_object = {
+            'status': 'fail',
+            'message': 'Some error occurred. Please try again.'
+        }
+        return response_object, 401

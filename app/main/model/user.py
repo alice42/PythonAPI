@@ -14,6 +14,9 @@ class User(db.Model):
     admin = db.Column(db.Boolean, nullable=False, default=False)
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
+    name = db.Column(db.String(50), nullable=True)
+    firstname = db.Column(db.String(50), nullable=True)
+    birthday = db.Column(db.DateTime, nullable=True,)
     password_hash = db.Column(db.String(100))
     properties = db.relationship('Property', backref='user')
 

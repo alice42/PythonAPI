@@ -67,10 +67,18 @@ Send a `GET` request to the `user/<user_public_id>` route.
 
 ## Delete user
 
+Only owner of the account can delete it
+A deleted user will be logged out and the token blacklisted
+
+Send a `DELETE` request to the `user/<user_public_id>` route.
+(Authorization required)
+
 ## Create a property
 
 Send a `POST` request to the `/property` route with a `Content-Type: application/json`
 (Authorization required)
+
+notice that `room_count` can't be 0
 
 ```
 {
@@ -85,8 +93,12 @@ Send a `POST` request to the `/property` route with a `Content-Type: application
 
 ## Edit a property
 
+Only owner of the property can edit it
+
 Send a `PATCH` request with the fields to be modified to the `/property/<property_public_id>` with a `Content-Type: application/json`:
 (Authorization required)
+
+notice that `room_count` can't be 0
 
 ```
 {
@@ -108,3 +120,8 @@ Send a `GET` request to the `property/<property_public_id>` route.
 ## Find properties by city
 
 ## Delete a property
+
+Only owner of the property can edit it
+
+Send a `DELETE` request to the `property/<property_public_id>` route.
+(Authorization required)
