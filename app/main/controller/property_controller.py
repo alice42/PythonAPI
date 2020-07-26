@@ -19,7 +19,7 @@ _property_update = PropertyDto.property_update
 class PropertyList(Resource):
     @api.doc('list_of_registered_properties')
     @token_required
-    @api.marshal_list_with(_property, envelope='data')
+    @api.marshal_list_with(_property)
     def get(self):
         """List all registered properties"""
         return get_all_properties()
@@ -49,7 +49,6 @@ class Property(Resource):
             api.abort(404)
         else:
             return property
-    # PUT/PATCH
     @api.response(201, 'Property successfully updated.')
     @api.doc('update a property')
     @token_required
@@ -72,7 +71,7 @@ class Property(Resource):
 class PropertyList(Resource):
     @api.doc('list_of_registered_properties_filtered_ by_city')
     @token_required
-    @api.marshal_list_with(_property, envelope='data')
+    @api.marshal_list_with(_property)
     def get(self, city):
         """List all registered properties"""
         return get_properties_by_city(city=city)
