@@ -18,7 +18,7 @@ _property_update = PropertyDto.property_update
 @api.route('/')
 class PropertyList(Resource):
     @api.doc('list_of_registered_properties')
-    # @token_required
+    @token_required
     @api.marshal_list_with(_property, envelope='data')
     def get(self):
         """List all registered properties"""
@@ -26,7 +26,7 @@ class PropertyList(Resource):
 
     @api.response(201, 'Property successfully created.')
     @api.doc('create a new property')
-    # @token_required
+    @token_required
     @api.expect(_property_update, validate=True)
     def post(self):
         """Creates a new Property """
@@ -40,7 +40,7 @@ class PropertyList(Resource):
 @api.response(404, 'Property not found.')
 class Property(Resource):
     @api.doc('get a property')
-    # @token_required
+    @token_required
     @api.marshal_with(_property)
     def get(self, public_id):
         """get a property given its identifier"""
@@ -52,15 +52,15 @@ class Property(Resource):
     # PUT/PATCH
     @api.response(201, 'Property successfully updated.')
     @api.doc('update a property')
-    # @token_required
+    @token_required
     @api.expect(_property_update, validate=True)
     def patch(self, public_id):
         """update a property given its identifier"""
         data = request.json
         auth_header = request.headers.get('Authorization')
         return save_updated_property(public_id=public_id, data=data, token=auth_header)
-    # @api.doc('delete a user')
-    # @token_required
+    @api.doc('delete a property')
+    @token_required
     def delete(self, public_id):
         """delete a user given its identifier"""
         auth_header = request.headers.get('Authorization')
@@ -71,7 +71,7 @@ class Property(Resource):
 @api.response(404, 'city not found.')
 class PropertyList(Resource):
     @api.doc('list_of_registered_properties_filtered_ by_city')
-    # @token_required
+    @token_required
     @api.marshal_list_with(_property, envelope='data')
     def get(self, city):
         """List all registered properties"""
