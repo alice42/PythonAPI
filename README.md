@@ -51,10 +51,17 @@ $ python3 manage.py db upgrade
 
 A `migrations` folder should be generate at the root of the project.
 A `flask_main.db` file should be generate in `/app/main/`
-Run the app
+
+### Run the app
 
 ```
 $ python3 manage.py run
+```
+
+### Run the test
+
+```
+$ python3 manage.py test
 ```
 
 ### Viewing the app

@@ -5,8 +5,9 @@ from ..util.dto import PropertyDto
 from ..service.property_service import save_new_property, \
     get_all_properties, \
     get_a_property, \
+    get_properties_by_city, \
     save_updated_property, \
-    check_user_permission
+    check_user_permission 
 
 from app.main.util.decorator import token_required
 
@@ -64,3 +65,14 @@ class Property(Resource):
         """delete a user given its identifier"""
         auth_header = request.headers.get('Authorization')
         return check_user_permission(public_id=public_id, token=auth_header)
+
+@api.route('/city/<city>')
+@api.param('city', 'The city use to filter properties')
+@api.response(404, 'city not found.')
+class PropertyList(Resource):
+    @api.doc('list_of_registered_properties_filtered_ by_city')
+    # @token_required
+    @api.marshal_list_with(_property, envelope='data')
+    def get(self, city):
+        """List all registered properties"""
+        return get_properties_by_city(city=city)

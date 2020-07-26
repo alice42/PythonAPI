@@ -60,6 +60,8 @@ def save_new_property(data, token):
 def get_all_properties():
     return Property.query.all()
 
+def get_properties_by_city(city):
+    return Property.query.filter_by(city=city).all()
 
 def get_a_property(public_id):
     return Property.query.filter_by(public_id=public_id).first()

@@ -49,6 +49,8 @@ Send a `POST` request to the `/auth/logout` route.
 Send a PATCH request with the fields to be modified to the `/user/<user_public_id>` with a `Content-Type: application/json`:
 (Authorization required)
 
+notice that `birthday` must be Iso8601 format
+
 ```
 {
 	"username":"newUsername"
@@ -117,11 +119,14 @@ Send a `GET` request to the `property/` route.
 Send a `GET` request to the `property/<property_public_id>` route.
 (Authorization required)
 
-## Find properties by city
-
 ## Delete a property
 
 Only owner of the property can edit it
 
 Send a `DELETE` request to the `property/<property_public_id>` route.
+(Authorization required)
+
+## Find properties by city
+
+Send a `GET` request to the `property/city/<city>` route.
 (Authorization required)
