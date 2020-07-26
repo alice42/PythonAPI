@@ -254,7 +254,8 @@ Temporary Items
 .history
 
 ###SQLAlchemy
-#Ignore db
+#Ignore .db and migrations folder
 .db
+migrations/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,macos,visualstudiocode,git

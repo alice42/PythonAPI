@@ -49,6 +49,7 @@ $ python3 manage.py db migrate --message 'initial database migration'
 $ python3 manage.py db upgrade
 ```
 
+A `flask_main.db` file should be generate in `/app`
 Run the app
 
 ```
@@ -57,9 +58,8 @@ $ python3 manage.py run
 
 ### Viewing the app
 
-    Open the following url on your browser to view swagger documentation
-    http://127.0.0.1:5000/
+Open the following url on your browser to view swagger documentation http://127.0.0.1:5000/
 
 ### Using the app
 
-    See [INSTRUCTIONS](https://github.com/alice42/ApiArcane/blob/master/INSTRUCTIONS.md) |
+See [INSTRUCTIONS](https://github.com/alice42/ApiArcane/blob/master/INSTRUCTIONS.md)
