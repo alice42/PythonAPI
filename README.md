@@ -23,7 +23,8 @@ Create a virtualenv
 $ virtualenv venv
 ```
 
-and activate it
+A `venv` folder should be generate at the root of the project.
+Then activate it
 
 ```
 $ source venv/bin/activate
