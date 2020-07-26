@@ -4,13 +4,16 @@ from flask_restplus import Resource
 from ..util.dto import UserDto
 from ..service.user_service import save_new_user, get_all_users, get_a_user
 
+from app.main.util.decorator import token_required
+
 api = UserDto.api
 _user = UserDto.user
-
+_user_update = UserDto.user_update
 
 @api.route('/')
 class UserList(Resource):
     @api.doc('list_of_registered_users')
+    # @token_required
     @api.marshal_list_with(_user, envelope='data')
     def get(self):
         """List all registered users"""
@@ -18,7 +21,7 @@ class UserList(Resource):
 
     @api.response(201, 'User successfully created.')
     @api.doc('create a new user')
-    @api.expect(_user, validate=True)
+    @api.expect(_user_update, validate=True)
     def post(self):
         """Creates a new User """
         data = request.json

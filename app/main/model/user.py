@@ -15,6 +15,7 @@ class User(db.Model):
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
+    properties = db.relationship('Property', backref='user')
 
     @property
     def password(self):
@@ -48,8 +49,8 @@ class User(db.Model):
             )
         except Exception as e:
             return e
-    
-    @staticmethod 
+        
+    @staticmethod  
     def decode_auth_token(auth_token):
         """
         Decodes the auth token
