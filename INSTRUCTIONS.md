@@ -22,8 +22,8 @@ Send a `POST` request to the `/user/` route with a `Content-Type: application/js
 ```
 {
 	"email":"example@gmail.com",
-    "username":"username",
-    "password":"123456"
+	"username":"username",
+	"password":"123456"
 }
 
 ```
@@ -85,10 +85,10 @@ notice that `room_count` can't be 0
 ```
 {
 	"name":"a property name",
-    "description":"a description",
-    "property_type":"mansion",
-    "city":"Paris",
-    "rooms_count":2
+	"description":"a description",
+	"property_type":"mansion",
+	"city":"Paris",
+	"rooms_count":2
 }
 
 ```
@@ -104,7 +104,7 @@ notice that `room_count` can't be 0
 
 ```
 {
-    "name":"a new property name",
+	"name":"a new property name",
 	"description":"a new description"
 }
 ```
